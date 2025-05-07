@@ -1,0 +1,32 @@
+As i ran the predict.py i was quite excited to see that the predicted and actual labels were same, i mean accuracy was very high, 
+i even doubted about possible overfitting but then was a little drawnback because there was less likely chance because of the 
+training and testing splits and transformations i have done but as the prediction outputs were being displayed i suddenly noticed a 
+weird pattern where Meningioma images are frequently misclassified as no tumor, There are various possibilities for that and analysing
+it is very crutial, so i would fine tune the model.
+
+AFTER RUNNING predict.py for the first time:
+*Accuracy on the test set: 0.7971
+*Total time taken: 1292.97 seconds
+these were the metrics.
+
+Visualising few misclassified images and observing similarities or patterns may help solve this problem.
+
+Planned Solutions:
+
+1.  **Data Analysis:**
+    * Visualize misclassified images (using `visualize_misclassified.py`) to identify common features.
+    * Analyze the class distribution in the training and testing sets.
+    * Examine image quality for differences between meningioma and no tumor.
+
+2.  **Address Data Imbalance:**
+    * Apply more aggressive data augmentation to the meningioma class (e.g., rotations, zooming, shearing).
+    * Use class weighting in the loss function to penalize meningioma misclassifications more heavily.
+    * Consider oversampling meningioma images or undersampling no tumor images (with caution).
+
+3.  **Improve Model Architecture:**
+    * Experiment with deeper or more complex CNN architectures.
+    * Explore using attention mechanisms to help the model focus on relevant features.
+
+4.  **Refine Preprocessing:**
+     * Check normalization
+     * Consider different resizing/cropping.
