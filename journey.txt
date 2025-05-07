@@ -1,0 +1,43 @@
+My Journey: Developing a Brain Tumor Classifier Using Deep Learning
+
+This project was driven by the idea of creating a machine learning model that could assist in the classification of brain tumors from MRI scans. The ultimate goal was to support medical professionals by providing a reliable second opinion, thereby improving diagnostic efficiency and accuracy.
+
+Phase 1: Project Initiation and Setup
+
+The journey began by setting up the development environment. I chose Python as the programming language due to its strong support for machine learning and image processing libraries. For deep learning, I used PyTorch. OpenCV was selected for image preprocessing, and Gradio was integrated for building a simple user interface. With the necessary tools in place, I outlined the scope and structure of the project.
+
+Phase 2: Data Collection and Preparation
+
+A crucial step was gathering an appropriate dataset. I obtained MRI images categorized into four classes: glioma, meningioma, pituitary, and no tumor. The dataset was structured into separate folders for training and testing. Preprocessing steps included resizing, cropping, and normalizing the images. I also applied data augmentation techniques such as random flips and rotations to improve model robustness and generalization.
+
+Phase 3: Model Selection and Training
+
+I selected a Convolutional Neural Network (CNN) for the classification task, as CNNs are well-suited for image-based problems. The model architecture was defined in a file named model.py, and the training script was implemented in train.py. This script handled loading the data, applying transformations, training the model using a suitable optimizer and loss function, and finally saving the trained model to a file named brain_tumor_classifier.pth.
+
+Phase 4: Initial Testing and Evaluation
+
+With the model trained, I tested it using the predict.py script on the test set. The initial results showed an accuracy of approximately 80%. While this was a good starting point, it became evident that further refinement was necessary, particularly in handling specific tumor types.
+
+Phase 5: Identifying a Misclassification Pattern
+
+During evaluation, I noticed a recurring issue: the model often misclassified meningioma tumors as "no tumor". This raised concerns about the model's reliability, especially in sensitive diagnostic scenarios. To explore this further, I developed a visualization script (visualize_misclassified.py) that displayed the misclassified images for manual inspection.
+
+Phase 6: Analyzing the Misclassification
+
+By visualizing the errors, I observed certain patterns. The misclassified meningioma images were often small, located near the edges of the brain, or had indistinct boundaries that blended with surrounding tissues. I documented these findings in a file called noticedpattern.txt. I hypothesized that these errors could be attributed to data imbalance (fewer subtle meningioma cases in the training set) and the model’s inability to pick up subtle visual features.
+
+Phase 7: Planning and Implementing Solutions
+
+Based on the observations, I implemented several improvements. First, I applied more aggressive augmentation specifically to the meningioma class, including zooming and adding noise, to help the model learn to detect smaller and blurrier tumors. Second, I introduced class weighting in the loss function during training to increase the penalty for misclassifying meningioma cases. These changes were incorporated into the train.py script, and the model was retrained.
+
+Phase 8: User Interface Development
+
+While refining the model, I also worked on building a user-friendly interface using Gradio in a script called user_interface.py. The interface allows users to upload an MRI image and receive a prediction along with a brief report. This report includes the predicted tumor type, potential surgical options, and immediate recommended actions, providing a valuable tool for medical use cases.
+
+Phase 9: Final Execution and Testing
+
+The final phase involved integrating all components and testing the complete system. The updated model showed improved accuracy and handled previously problematic meningioma cases more effectively. The user interface worked smoothly, making the system accessible and easy to use. The project concluded successfully, delivering a practical and informative brain tumor classification system.
+
+Conclusion
+
+This project represents a complete pipeline for developing a medical image classification tool. From data preprocessing and model training to interface development and debugging, each phase contributed to building a robust and usable application. Through analysis and iteration, the model was refined to achieve better accuracy and reliability, demonstrating the power of applied machine learning in healthcare.
