@@ -4,8 +4,9 @@ from PIL import Image
 import cv2
 import numpy as np
 import os
-from model import BrainTumorClassifier  # Importing model class
+from model import BrainTumorClassifier  # Import your model class
 from torch.utils.data import DataLoader, Dataset
+import time  # Import the time module
 
 
 class BrainTumorDataset(Dataset):
@@ -91,9 +92,10 @@ def predict_image(image_path, model_path='brain_tumor_classifier.pth'):
         return "Error", -1
 
 
+
 if __name__ == "__main__":
     # Load the test dataset
-    test_dir = 'data/Testing'  
+    test_dir = 'data/Testing'  # Replace with the path to your testing data
     test_transforms = transforms.Compose([
         transforms.Resize(256),
         transforms.CenterCrop(224),
@@ -115,6 +117,7 @@ if __name__ == "__main__":
     total_images = 0
     all_predictions = []
     all_labels = []
+    start_time = time.time() #start the timer
 
     # Iterate through the test set, make predictions, and calculate accuracy
     for images, labels in test_loader:
@@ -127,11 +130,14 @@ if __name__ == "__main__":
             all_labels.append(labels.item())
             if predicted_class_idx == labels.item():
                 correct_predictions += 1
+            print(f"Predicted: {predicted_class_name}, Actual: {test_dataset.classes[labels.item()]}  ({total_images+1}/{len(test_dataset)})") # print the prediction
         else:
-            print(f"Prediction failed for image: {test_dataset.images[total_images]}")
+            print(f"Prediction failed for image: {test_dataset.images[total_images]}  ({total_images+1}/{len(test_dataset)})")
 
         total_images += 1
+    end_time = time.time() #end the timer
 
     # Calculate and print the accuracy
     accuracy = correct_predictions / total_images
     print(f"Accuracy on the test set: {accuracy:.4f}")
+    print(f"Total time taken: {end_time - start_time:.2f} seconds")
