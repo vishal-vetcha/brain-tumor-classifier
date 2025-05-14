@@ -7,4 +7,4 @@ __pycache__/
 .idea/
 .env
 .DS_Store
-data/
+data/"brain_tumor_classifier.pth" 
